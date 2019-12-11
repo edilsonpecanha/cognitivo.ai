@@ -19,8 +19,8 @@ spark = SparkSession.builder.enableHiveSupport().getOrCreate()
 try:
 
     '''
-    Criando um schema para acertar o nome das colunas email e name que estão trocados.
-    Por conta da modificação acima, uma mensagem WARN será exiba avisando que o schema não está em conformidade com o hea 
+    Criando um schema para acertar o nome das colunas email e name que estam trocados.
+    Por conta da modificação acima, uma mensagem WARN será exiba avisando que o schema não está em conformidade com o head 
     Dessa forma o nome da coluna faz mais sentido com o conteúdo.    
     Modificando o tipo do campo ID. Os outros campos serão alterados mais a frente conforme requisito.      
     '''
@@ -54,8 +54,8 @@ try:
         df_rnk = df_rnk.withColumn(tm, funcs.col(tm).cast(types_mapping[tm]))
 
     # Mostrando schema no final do processo
-    df.printSchema()
-    df.show()
+    df_rnk.printSchema()
+    df_rnk.show()
 
     '''
     Requisito 1
@@ -69,9 +69,9 @@ try:
     '''
     Lendo o arquivo ORC exportado 
     '''
-    df = spark.read.orc('data/output/users/orc')
-    df.printSchema()
-    df.show()
+    df_orc = spark.read.orc('data/output/users/orc')
+    df_orc.printSchema()
+    df_orc.show()
 
 except Exception as e:
     logging.error(e)
